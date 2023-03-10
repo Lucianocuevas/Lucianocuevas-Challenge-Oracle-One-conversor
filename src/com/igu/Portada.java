@@ -987,7 +987,7 @@ public class Portada extends javax.swing.JFrame {
 
         int key = evt.getKeyChar();
 
-        boolean numeros = key >= 48 && key <= 57;
+        boolean numeros = key == 32 && key == 127 && key == 8 && key >= 48 && key <= 57;
 
         if (!numeros) {
             JOptionPane.showMessageDialog(null, "Solo numeros", "¡Error!", JOptionPane.WARNING_MESSAGE);
@@ -1000,7 +1000,7 @@ public class Portada extends javax.swing.JFrame {
     private void txtfValorCambioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfValorCambioKeyTyped
         int key = evt.getKeyChar();
 
-        boolean numeros = key >= 48 && key <= 57;
+        boolean numeros = key == 32 && key == 127 && key == 8 && key >= 48 && key <= 57;
 
         if (!numeros) {
             JOptionPane.showMessageDialog(null, "Solo numeros", "¡Error!", JOptionPane.WARNING_MESSAGE);
@@ -1087,7 +1087,7 @@ public class Portada extends javax.swing.JFrame {
     private void txtfEntradaTmpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfEntradaTmpKeyTyped
         int key = evt.getKeyChar();
 
-        boolean numeros = key != 47 && key >= 44 && key <= 57;
+        boolean numeros = key != 47 && key == 32 && key == 127 && key == 8 && key >= 44 && key <= 57;
 
         if (!numeros) {
             JOptionPane.showMessageDialog(null, "Solo numeros", "¡Error!", JOptionPane.WARNING_MESSAGE);
@@ -1098,7 +1098,7 @@ public class Portada extends javax.swing.JFrame {
     private void txtfEntradaLongKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfEntradaLongKeyTyped
         int key = evt.getKeyChar();
 
-        boolean numeros = key != 47 && key >= 44 && key <= 57;
+        boolean numeros = key != 47 && key == 32 && key == 127 && key == 8 && key == 32 && key == 127 && key == 8 && key >= 44 && key <= 57;
 
         if (!numeros) {
             JOptionPane.showMessageDialog(null, "Solo numeros", "¡Error!", JOptionPane.WARNING_MESSAGE);

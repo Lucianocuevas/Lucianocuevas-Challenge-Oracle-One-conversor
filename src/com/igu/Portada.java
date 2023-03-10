@@ -13,6 +13,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 import java.text.DecimalFormat;
+import javax.swing.JColorChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -112,7 +113,8 @@ public class Portada extends javax.swing.JFrame {
         lblSalidaLong = new javax.swing.JLabel();
         mbMenu = new javax.swing.JMenuBar();
         Menu = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        mniAcercaDe = new javax.swing.JMenuItem();
+        mniSalir = new javax.swing.JMenuItem();
 
         dlgCambio.setTitle("Cambio Valor");
         dlgCambio.setEnabled(false);
@@ -196,7 +198,6 @@ public class Portada extends javax.swing.JFrame {
 
         frmAcercaDe.setTitle("Acerca de...");
         frmAcercaDe.setBackground(new java.awt.Color(107, 0, 84));
-        frmAcercaDe.setMaximumSize(new java.awt.Dimension(608, 250));
         frmAcercaDe.setMinimumSize(new java.awt.Dimension(608, 250));
         frmAcercaDe.setResizable(false);
 
@@ -692,13 +693,23 @@ public class Portada extends javax.swing.JFrame {
 
         Menu.setText("Acerca de...");
 
-        jMenuItem1.setText("Acerca del programa");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        mniAcercaDe.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        mniAcercaDe.setText("Acerca del programa");
+        mniAcercaDe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                mniAcercaDeActionPerformed(evt);
             }
         });
-        Menu.add(jMenuItem1);
+        Menu.add(mniAcercaDe);
+
+        mniSalir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        mniSalir.setText("Salir");
+        mniSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniSalirActionPerformed(evt);
+            }
+        });
+        Menu.add(mniSalir);
 
         mbMenu.add(Menu);
 
@@ -773,6 +784,11 @@ public class Portada extends javax.swing.JFrame {
                         break;
                 }
                 break;
+        }
+        int confirma = JOptionPane.showConfirmDialog(rootPane, "¿Desea Continuar?", "Continuar usando", WIDTH);
+        if (confirma != 0){
+            JOptionPane.showMessageDialog(null, "Programa Terminado");
+            System.exit(0);
         }
     }//GEN-LAST:event_btnConvertirMonedaActionPerformed
 
@@ -1157,6 +1173,11 @@ public class Portada extends javax.swing.JFrame {
                 }
                 break;
         }
+        int confirma = JOptionPane.showConfirmDialog(rootPane, "¿Desea Continuar?", "Continuar usando", WIDTH);
+        if (confirma != 0){
+            JOptionPane.showMessageDialog(null, "Programa Terminado");
+            System.exit(0);
+        }
     }//GEN-LAST:event_btnConvertirTmpActionPerformed
 
     private void cmbEntradaTmpItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEntradaTmpItemStateChanged
@@ -1403,18 +1424,30 @@ public class Portada extends javax.swing.JFrame {
                 }
                 break;
         }
+        int confirma = JOptionPane.showConfirmDialog(rootPane, "¿Desea Continuar?", "Continuar usando", WIDTH);
+        if (confirma != 0){
+            JOptionPane.showMessageDialog(null, "Programa Terminado");
+            System.exit(0);
+        }
     }//GEN-LAST:event_btnConvertirLongActionPerformed
 
     private void cmbEntradaTmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEntradaTmpActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbEntradaTmpActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void mniAcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniAcercaDeActionPerformed
         //Hago Visible formulario de info del programa
         frmAcercaDe.setVisible(true);
         frmAcercaDe.setLocationRelativeTo(null);
         frmAcercaDe.setIconImage(getIconImage());//setIconImage(getIconImage());
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_mniAcercaDeActionPerformed
+
+    private void mniSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSalirActionPerformed
+        int confirma = JOptionPane.showConfirmDialog(null, "Desea terminar el programa", "Cerrar", JOptionPane.CANCEL_OPTION);
+        if (confirma ==0){
+            System.exit(0);
+        }
+    }//GEN-LAST:event_mniSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1473,7 +1506,6 @@ public class Portada extends javax.swing.JFrame {
     private javax.swing.JDialog dlgCambio;
     private javax.swing.JFrame frmAcercaDe;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
@@ -1495,6 +1527,8 @@ public class Portada extends javax.swing.JFrame {
     private javax.swing.JLabel lblValorOficial;
     private javax.swing.JLabel lblValorTexto;
     private javax.swing.JMenuBar mbMenu;
+    private javax.swing.JMenuItem mniAcercaDe;
+    private javax.swing.JMenuItem mniSalir;
     private javax.swing.JPanel pnlCabecera;
     private javax.swing.JPanel pnlLongitud;
     private javax.swing.JPanel pnlMonedas;

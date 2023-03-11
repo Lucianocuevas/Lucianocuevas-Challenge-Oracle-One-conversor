@@ -29,7 +29,6 @@ public class Portada extends javax.swing.JFrame {
     Longitud longitud = new Longitud();
     Temperatura tmp = new Temperatura();
     DecimalFormat redondeo = new DecimalFormat("#0.000");
-    
 
     /**
      * Creates new form Portada
@@ -38,11 +37,8 @@ public class Portada extends javax.swing.JFrame {
         initComponents();
 
         setIconImage(getIconImage());
-        
-        
+
     }
-    
-    
 
     @Override
     public Image getIconImage() {
@@ -124,7 +120,7 @@ public class Portada extends javax.swing.JFrame {
 
         jTextField1.setEditable(false);
         jTextField1.setFont(new java.awt.Font("Exo SemiBold", 0, 16)); // NOI18N
-        jTextField1.setText("Peso Argentino");
+        jTextField1.setText("Dolar US$");
         dlgCambio.getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, 30));
 
         txtfValorCambio.setEditable(false);
@@ -139,7 +135,7 @@ public class Portada extends javax.swing.JFrame {
         dlgCambio.getContentPane().add(txtfValorCambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 100, 30));
 
         cmbCambio.setFont(new java.awt.Font("Exo SemiBold", 0, 16)); // NOI18N
-        cmbCambio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dolar US$", "Euro €" }));
+        cmbCambio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Peso Argentino AR$", "Euro €", "Libra Esterlina ₤", "Yen Japones ¥", "Won Surcoreano ₩" }));
         cmbCambio.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbCambioItemStateChanged(evt);
@@ -365,7 +361,7 @@ public class Portada extends javax.swing.JFrame {
         });
 
         cmbSalidaMoneda.setFont(new java.awt.Font("Exo Medium", 0, 24)); // NOI18N
-        cmbSalidaMoneda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Peso Argentino AR$", "Dolar US$", "EURO €", " ", " ", " " }));
+        cmbSalidaMoneda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Peso Argentino AR$", "Dolar US$", "EURO €", "Libras Esterlinas £", "Yen Japones ¥", "Won Surcoreano ₩", " ", " " }));
         cmbSalidaMoneda.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbSalidaMonedaItemStateChanged(evt);
@@ -415,7 +411,7 @@ public class Portada extends javax.swing.JFrame {
         });
 
         cmbEntradaMoneda.setFont(new java.awt.Font("Exo Medium", 0, 24)); // NOI18N
-        cmbEntradaMoneda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Peso Argentino AR$", "Dolar US$", "EURO €", " ", " ", " " }));
+        cmbEntradaMoneda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Peso Argentino AR$", "Dolar US$", "EURO €", "Libras Esterlinas £", "Yen Japones ¥", "Won Surcoreano ₩", " ", " " }));
         cmbEntradaMoneda.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbEntradaMonedaItemStateChanged(evt);
@@ -462,15 +458,12 @@ public class Portada extends javax.swing.JFrame {
             pnlMonedasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlMonedasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlMonedasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlMonedasLayout.createSequentialGroup()
-                        .addGroup(pnlMonedasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnConvertirMoneda, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbEntradaMoneda, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(19, 19, 19))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMonedasLayout.createSequentialGroup()
-                        .addComponent(cmbSalidaMoneda, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)))
+                .addGroup(pnlMonedasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(pnlMonedasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnConvertirMoneda, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbEntradaMoneda, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbSalidaMoneda))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(pnlMonedasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblValorOficial, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
                     .addGroup(pnlMonedasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -736,25 +729,35 @@ public class Portada extends javax.swing.JFrame {
             case 0:
                 switch (j) {
                     case 0:
-                        //lblBanderaSalida.setIcon(ge BanderaArgentina.png);
                         lblValorOficial.setText("1");
                         txtfSalida.setText(String.valueOf(entrada));
                         break;
                     case 1:
-                        lblValorOficial.setText(String.valueOf(redondeo.format(conversor.getDolar())));
+                        lblValorOficial.setText(String.valueOf(redondeo.format(conversor.pesodolar(cambio))));
                         txtfSalida.setText(String.valueOf(redondeo.format(conversor.pesodolar(entrada))));
                         break;
                     case 2:
-                        lblValorOficial.setText(String.valueOf(conversor.getEuro()));
+                        lblValorOficial.setText(String.valueOf(conversor.pesoeuro(1)));
                         txtfSalida.setText(String.valueOf(redondeo.format(conversor.pesoeuro(entrada))));
+                        break;
+                    case 3:
+                        lblValorOficial.setText(String.valueOf(redondeo.format(conversor.pesolibras(1))));
+                        txtfSalida.setText(String.valueOf(redondeo.format(conversor.pesolibras(cambio))));
+                        break;
+                    case 4:
+                        lblValorOficial.setText(String.valueOf(redondeo.format(conversor.pesoyenJapones(1))));
+                        txtfSalida.setText(String.valueOf(redondeo.format(conversor.pesoyenJapones(cambio))));
+                        break;
+                    case 5:
+                        lblValorOficial.setText(String.valueOf(redondeo.format(conversor.pesowonCoreaS(1))));
+                        txtfSalida.setText(String.valueOf(redondeo.format(conversor.pesowonCoreaS(cambio))));
                         break;
                 }
                 break;
             case 1:
                 switch (j) {
                     case 0:
-                        //lblBanderaSalida.setIcon(ge BanderaArgentina.png);
-                        lblValorOficial.setText(String.valueOf(redondeo.format(conversor.dolarpeso(1))));
+                        lblValorOficial.setText(String.valueOf(conversor.dolarpeso(1)));
                         txtfSalida.setText(String.valueOf(redondeo.format(conversor.dolarpeso(entrada))));
                         break;
                     case 1:
@@ -765,30 +768,50 @@ public class Portada extends javax.swing.JFrame {
                         lblValorOficial.setText(String.valueOf(redondeo.format(conversor.dolareuro(1))));
                         txtfSalida.setText(String.valueOf(redondeo.format(conversor.dolareuro(entrada))));
                         break;
+                    case 3:
+                        lblValorOficial.setText(String.valueOf(redondeo.format(conversor.dolarlibras(1))));
+                        txtfSalida.setText(String.valueOf(redondeo.format(conversor.dolarlibras(entrada))));
+                        break;
+                    case 4:
+                        lblValorOficial.setText(String.valueOf(redondeo.format(conversor.dolaryenJapones(1))));
+                        txtfSalida.setText(String.valueOf(redondeo.format(conversor.dolaryenJapones(entrada))));
+                        break;
+                    case 5:
+                        lblValorOficial.setText(String.valueOf(redondeo.format(conversor.dolarwonCoreaS(1))));
+                        txtfSalida.setText(String.valueOf(redondeo.format(conversor.dolarwonCoreaS(entrada))));
+                        break;
                 }
                 break;
             case 2:
-                switch (j) {
-                    case 0:
-                        //lblBanderaSalida.setIcon(getClass().getResource("/com.imagenes/BanderaArgentina.png"));
-                        lblValorOficial.setText(String.valueOf(redondeo.format(conversor.getPeso() / conversor.getEuro())));
-                        txtfSalida.setText(String.valueOf(redondeo.format(conversor.europeso(entrada))));
-                        break;
-                    case 1:
-                        lblValorOficial.setText(String.valueOf(redondeo.format(conversor.eurodolar(1))));
-                        txtfSalida.setText(String.valueOf(redondeo.format(conversor.eurodolar(entrada))));
-                        break;
-                    case 2:
-                        lblValorOficial.setText("1");
-                        txtfSalida.setText(String.valueOf(redondeo.format(entrada)));
-                        break;
-                }
+
+                lblValorOficial.setText(String.valueOf(redondeo.format(conversor.europeso(1))));
+                txtfSalida.setText(String.valueOf(redondeo.format(conversor.europeso(entrada))));
+
+                break;
+            case 3:
+                lblValorOficial.setText(String.valueOf(redondeo.format(conversor.libraspeso(cambio))));
+                txtfSalida.setText(String.valueOf(redondeo.format(conversor.libraspeso(entrada))));
+                break;
+            case 4:
+                lblValorOficial.setText(String.valueOf(redondeo.format(conversor.yenJaponesPeso(cambio))));
+                txtfSalida.setText(String.valueOf(redondeo.format(conversor.yenJaponesPeso(entrada))));
+                break;
+            case 5:
+                lblValorOficial.setText(String.valueOf(redondeo.format(conversor.wonCoreaSPeso(cambio))));
+                txtfSalida.setText(String.valueOf(redondeo.format(conversor.wonCoreaSPeso(entrada))));
                 break;
         }
+        JOptionPane.showMessageDialog(null, "Usted tiene $ " + txtfSalida.getText() + " " + cmbSalidaMoneda.getSelectedItem().toString(), "Conversor", HEIGHT);
         int confirma = JOptionPane.showConfirmDialog(rootPane, "¿Desea Continuar?", "Continuar usando", WIDTH);
-        if (confirma != 0){
+        if (confirma != 0) {
             JOptionPane.showMessageDialog(null, "Programa Terminado");
             System.exit(0);
+        } else {
+            cmbSalidaMoneda.setEnabled(true);
+            cmbEntradaMoneda.setSelectedIndex(0);
+            cmbSalidaMoneda.setSelectedIndex(0);
+            cmbEntradaMoneda.setEnabled(true);
+
         }
     }//GEN-LAST:event_btnConvertirMonedaActionPerformed
 
@@ -809,11 +832,21 @@ public class Portada extends javax.swing.JFrame {
 
         switch (cmbCambio.getSelectedIndex()) {
             case 0:
-                conversor.setDolar(cambio);
+                conversor.setPeso(cambio);
                 break;
             case 1:
                 conversor.setEuro(cambio);
                 break;
+            case 2:
+                conversor.setLibras(cambio);
+                break;
+            case 3:
+                conversor.setYenJapon(cambio);
+                break;
+            case 4:
+                conversor.setWonCoreaS(cambio);
+                break;
+
         }
 
         // TODO add your handling code here:
@@ -832,10 +865,19 @@ public class Portada extends javax.swing.JFrame {
 
         switch (cmbCambio.getSelectedIndex()) {
             case 0:
-                txtfValorCambio.setText(String.valueOf(redondeo.format(conversor.dolarpeso(1))));
+                txtfValorCambio.setText(String.valueOf(redondeo.format(conversor.getPeso())));
                 break;
             case 1:
-                txtfValorCambio.setText(String.valueOf(redondeo.format(conversor.europeso(1))));
+                txtfValorCambio.setText(String.valueOf(redondeo.format(conversor.getEuro())));
+                break;
+            case 2:
+                txtfValorCambio.setText(String.valueOf(redondeo.format(conversor.getLibras())));
+                break;
+            case 3:
+                txtfValorCambio.setText(String.valueOf(redondeo.format(conversor.getYenJapon())));
+                break;
+            case 4:
+                txtfValorCambio.setText(String.valueOf(redondeo.format(conversor.getWonCoreaS())));
                 break;
         }
 
@@ -847,58 +889,110 @@ public class Portada extends javax.swing.JFrame {
 
         switch (i) {
             case 0:
-                lblBanderaEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/BanderaArgentina.png")));
+                lblBanderaEntrada.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaArgentina.png")));
+                cmbEntradaMoneda.setEnabled(true);
                 switch (j) {
                     case 0:
-                        lblBanderaSalida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/BanderaArgentina.png")));
+                        lblBanderaSalida.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaArgentina.png")));
                         lblValorOficial.setText("1");
                         break;
                     case 1:
-                        lblBanderaSalida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/BanderaUsa.png")));
-                        lblValorOficial.setText(String.valueOf(redondeo.format(conversor.getDolar())));
+                        lblBanderaSalida.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaUsa.png")));
+                        lblValorOficial.setText(String.valueOf(redondeo.format(conversor.pesodolar(1))));
                         break;
                     case 2:
-                        lblBanderaSalida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/BanderaEuro.png")));
-                        lblValorOficial.setText(String.valueOf(conversor.getEuro()));
+                        cmbEntradaMoneda.setEnabled(false);
+                        cmbEntradaMoneda.setSelectedIndex(0);
+                        lblBanderaSalida.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaEuro.png")));
+                        lblValorOficial.setText(String.valueOf(conversor.pesoeuro(1)));
                         break;
-                }
-                break;
-            case 1:
-                lblBanderaEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/BanderaUsa.png")));
-                switch (j) {
-                    case 0:
-                        lblBanderaSalida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/BanderaArgentina.png")));
-                        lblValorOficial.setText(String.valueOf(redondeo.format(conversor.dolarpeso(1))));
+                    case 3:
+                        cmbEntradaMoneda.setEnabled(false);
+                        cmbEntradaMoneda.setSelectedIndex(0);
+                        lblBanderaSalida.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaBritanica.png")));
+                        lblValorOficial.setText(String.valueOf(conversor.pesolibras(1)));
                         break;
-                    case 1:
-                        lblBanderaSalida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/BanderaUsa.png")));
-                        lblValorOficial.setText("1");
-                        txtfSalida.setText(String.valueOf(entrada));
+                    case 4:
+                        cmbEntradaMoneda.setEnabled(false);
+                        cmbEntradaMoneda.setSelectedIndex(0);
+                        lblBanderaSalida.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaJapon.png")));
+                        lblValorOficial.setText(String.valueOf(conversor.pesoyenJapones(1)));
                         break;
-                    case 2:
-                        lblBanderaSalida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/BanderaEuro.png")));
-                        lblValorOficial.setText(String.valueOf(redondeo.format(conversor.dolareuro(1))));
-                        break;
-                }
-                break;
-            case 2:
-                lblBanderaEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/BanderaEuro.png")));
-                switch (j) {
-                    case 0:
-                        lblBanderaSalida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/BanderaArgentina.png")));
-                        lblValorOficial.setText(String.valueOf(redondeo.format(conversor.getPeso() / conversor.getEuro())));
-                        break;
-                    case 1:
-                        lblBanderaSalida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/BanderaUsa.png")));
-                        lblValorOficial.setText(String.valueOf(redondeo.format(conversor.eurodolar(1))));
-                        break;
-                    case 2:
-                        lblBanderaSalida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/BanderaEuro.png")));
-                        lblValorOficial.setText("1");
+                    case 5:
+                        cmbEntradaMoneda.setEnabled(false);
+                        cmbEntradaMoneda.setSelectedIndex(0);
+                        lblBanderaSalida.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaCoreaS.png")));
+                        lblValorOficial.setText(String.valueOf(conversor.pesowonCoreaS(1)));
                         break;
                 }
                 break;
 
+            case 1:
+                cmbEntradaMoneda.setEnabled(true);
+                lblBanderaEntrada.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaUsa.png")));
+                switch (j) {
+                    case 0:
+                        lblBanderaSalida.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaArgentina.png")));
+                        lblValorOficial.setText(String.valueOf(redondeo.format(conversor.dolarpeso(1))));
+                        break;
+                    case 1:
+                        lblBanderaSalida.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaUsa.png")));
+                        lblValorOficial.setText("1");
+                        txtfSalida.setText(String.valueOf(entrada));
+                        break;
+                    case 2:
+                        cmbEntradaMoneda.setEnabled(false);
+                        cmbEntradaMoneda.setSelectedIndex(0);
+                        lblBanderaSalida.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaEuro.png")));
+                        lblValorOficial.setText(String.valueOf(redondeo.format(conversor.dolareuro(1))));
+                        break;
+                    case 3:
+                        cmbEntradaMoneda.setEnabled(false);
+                        cmbEntradaMoneda.setSelectedIndex(0);
+                        lblBanderaSalida.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaEuro.png")));
+                        lblValorOficial.setText(String.valueOf(redondeo.format(conversor.dolarlibras(1))));
+                        break;
+
+                    case 4:
+                        cmbEntradaMoneda.setEnabled(false);
+                        cmbEntradaMoneda.setSelectedIndex(0);
+                        lblBanderaSalida.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaEuro.png")));
+                        lblValorOficial.setText(String.valueOf(redondeo.format(conversor.dolaryenJapones(1))));
+                        break;
+                    case 5:
+                        cmbEntradaMoneda.setEnabled(false);
+                        cmbEntradaMoneda.setSelectedIndex(0);
+                        lblBanderaSalida.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaEuro.png")));
+                        lblValorOficial.setText(String.valueOf(redondeo.format(conversor.dolarwonCoreaS(1))));
+                        break;
+                }
+                break;
+            case 2:
+                cmbEntradaMoneda.setEnabled(false);
+                cmbEntradaMoneda.setSelectedIndex(0);
+                //j = 0;
+                lblBanderaEntrada.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaEuro.png")));
+                lblBanderaSalida.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaArgentina.png")));
+                lblValorOficial.setText(String.valueOf(redondeo.format(conversor.europeso(1))));
+                break;
+            case 3:
+                cmbEntradaMoneda.setEnabled(false);
+                cmbEntradaMoneda.setSelectedIndex(0);
+                lblBanderaEntrada.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaBritanica.png")));
+                lblValorOficial.setText(String.valueOf(redondeo.format(conversor.libraspeso(1))));
+                break;
+            case 4:
+                cmbEntradaMoneda.setEnabled(false);
+                cmbEntradaMoneda.setSelectedIndex(0);
+                lblBanderaEntrada.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaJapon.png")));
+                lblValorOficial.setText(String.valueOf(redondeo.format(conversor.yenJaponesPeso(1))));
+                break;
+            case 5:
+                cmbEntradaMoneda.setEnabled(false);
+                cmbEntradaMoneda.setSelectedIndex(0);
+                lblBanderaEntrada.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaCoreaS.png")));
+                lblValorOficial.setText(String.valueOf(redondeo.format(conversor.wonCoreaSPeso(1))));
+                break;
         }
     }//GEN-LAST:event_cmbSalidaMonedaItemStateChanged
 
@@ -909,60 +1003,95 @@ public class Portada extends javax.swing.JFrame {
 
         switch (i) {
             case 0:
-                lblBanderaEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/BanderaArgentina.png")));
+                lblBanderaEntrada.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaArgentina.png")));
+                cmbSalidaMoneda.setEnabled(true);
                 switch (j) {
                     case 0:
-                        lblBanderaSalida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/BanderaArgentina.png")));
+                        lblBanderaSalida.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaArgentina.png")));
                         lblValorOficial.setText("1");
                         break;
                     case 1:
-                        lblBanderaSalida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/BanderaUsa.png")));
-                        lblValorOficial.setText(String.valueOf(redondeo.format(conversor.getDolar())));
+                        lblBanderaSalida.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaUsa.png")));
+                        lblValorOficial.setText(String.valueOf(redondeo.format(conversor.pesodolar(1))));
                         break;
                     case 2:
-                        lblBanderaSalida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/BanderaEuro.png")));
-                        lblValorOficial.setText(String.valueOf(conversor.getEuro()));
+                        lblBanderaSalida.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaEuro.png")));
+                        lblValorOficial.setText(String.valueOf(conversor.pesoeuro(1)));
+                        break;
+                    case 3:
+                        lblBanderaSalida.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaBritanica.png")));
+                        lblValorOficial.setText(String.valueOf(conversor.pesolibras(1)));
+                        break;
+                    case 4:
+                        lblBanderaSalida.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaJapon.png")));
+                        lblValorOficial.setText(String.valueOf(conversor.pesoyenJapones(1)));
+                        break;
+                    case 5:
+                        lblBanderaSalida.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaCoreaS.png")));
+                        lblValorOficial.setText(String.valueOf(conversor.pesowonCoreaS(1)));
                         break;
                 }
                 break;
+
             case 1:
-                lblBanderaEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/BanderaUsa.png")));
+                lblBanderaEntrada.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaUsa.png")));
+                cmbSalidaMoneda.setEnabled(true);
                 switch (j) {
                     case 0:
-                        lblBanderaSalida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/BanderaArgentina.png")));
+                        lblBanderaSalida.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaArgentina.png")));
                         lblValorOficial.setText(String.valueOf(redondeo.format(conversor.dolarpeso(1))));
                         break;
                     case 1:
-                        lblBanderaSalida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/BanderaUsa.png")));
+                        lblBanderaSalida.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaUsa.png")));
                         lblValorOficial.setText("1");
                         txtfSalida.setText(String.valueOf(entrada));
                         break;
                     case 2:
-                        lblBanderaSalida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/BanderaEuro.png")));
+                        lblBanderaSalida.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaEuro.png")));
                         lblValorOficial.setText(String.valueOf(redondeo.format(conversor.dolareuro(1))));
+                        break;
+                    case 3:
+                        lblBanderaSalida.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaEuro.png")));
+                        lblValorOficial.setText(String.valueOf(redondeo.format(conversor.dolarlibras(1))));
+                        break;
+                    case 4:
+                        lblBanderaSalida.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaEuro.png")));
+                        lblValorOficial.setText(String.valueOf(redondeo.format(conversor.dolaryenJapones(1))));
+                        break;
+                    case 5:
+                        lblBanderaSalida.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaEuro.png")));
+                        lblValorOficial.setText(String.valueOf(redondeo.format(conversor.dolarwonCoreaS(1))));
                         break;
                 }
                 break;
             case 2:
-                lblBanderaEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/BanderaEuro.png")));
-                switch (j) {
-                    case 0:
-                        lblBanderaSalida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/BanderaArgentina.png")));
-                        lblValorOficial.setText(String.valueOf(redondeo.format(conversor.getPeso() / conversor.getEuro())));
-                        break;
-                    case 1:
-                        lblBanderaSalida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/BanderaUsa.png")));
-                        lblValorOficial.setText(String.valueOf(redondeo.format(conversor.eurodolar(1))));
-                        break;
-                    case 2:
-                        lblBanderaSalida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/BanderaEuro.png")));
-                        lblValorOficial.setText("1");
-                        break;
-                }
+                cmbSalidaMoneda.setEnabled(false);
+                cmbSalidaMoneda.setSelectedIndex(0);
+                //j = 0;
+                lblBanderaEntrada.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaEuro.png")));
+                lblBanderaSalida.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaArgentina.png")));
+                lblValorOficial.setText(String.valueOf(redondeo.format(conversor.europeso(1))));
+
                 break;
-
+            case 3:
+                cmbSalidaMoneda.setEnabled(false);
+                cmbSalidaMoneda.setSelectedIndex(0);
+                lblBanderaEntrada.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaBritanica.png")));
+                lblValorOficial.setText(String.valueOf(redondeo.format(conversor.libraspeso(1))));
+                break;
+            case 4:
+                cmbSalidaMoneda.setEnabled(false);
+                cmbSalidaMoneda.setSelectedIndex(0);
+                lblBanderaEntrada.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaJapon.png")));
+                lblValorOficial.setText(String.valueOf(redondeo.format(conversor.yenJaponesPeso(1))));
+                break;
+            case 5:
+                cmbSalidaMoneda.setEnabled(false);
+                cmbSalidaMoneda.setSelectedIndex(0);
+                lblBanderaEntrada.setIcon(new ImageIcon(getClass().getResource("/com/imagenes/BanderaCoreaS.png")));
+                lblValorOficial.setText(String.valueOf(redondeo.format(conversor.wonCoreaSPeso(1))));
+                break;
         }
-
     }//GEN-LAST:event_cmbEntradaMonedaItemStateChanged
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
@@ -987,9 +1116,11 @@ public class Portada extends javax.swing.JFrame {
 
         int key = evt.getKeyChar();
 
-        boolean numeros = key == 32 && key == 127 && key == 8 && key >= 48 && key <= 57;
+        boolean numeros = key >= 48 && key <= 57;
+        boolean borrar = key == 8;
+        boolean supr = key == 127;
 
-        if (!numeros) {
+        if (!(numeros || borrar || supr)) {
             JOptionPane.showMessageDialog(null, "Solo numeros", "¡Error!", JOptionPane.WARNING_MESSAGE);
             evt.consume();
         }
@@ -1087,9 +1218,11 @@ public class Portada extends javax.swing.JFrame {
     private void txtfEntradaTmpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfEntradaTmpKeyTyped
         int key = evt.getKeyChar();
 
-        boolean numeros = key != 47 && key == 32 && key == 127 && key == 8 && key >= 44 && key <= 57;
+        boolean numeros = key != 47 && key >= 44 && key <= 57;
+        boolean borrar = key == 8;
+        boolean supr = key == 127;
 
-        if (!numeros) {
+        if (!(numeros || borrar || supr)) {
             JOptionPane.showMessageDialog(null, "Solo numeros", "¡Error!", JOptionPane.WARNING_MESSAGE);
             evt.consume();
         }
@@ -1098,16 +1231,18 @@ public class Portada extends javax.swing.JFrame {
     private void txtfEntradaLongKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfEntradaLongKeyTyped
         int key = evt.getKeyChar();
 
-        boolean numeros = key != 47 && key == 32 && key == 127 && key == 8 && key == 32 && key == 127 && key == 8 && key >= 44 && key <= 57;
+        boolean numeros = key != 47 && key >= 44 && key <= 57;
+        boolean borrar = key == 8;
+        boolean supr = key == 127;
 
-        if (!numeros) {
+        if (!(numeros || borrar || supr)) {
             JOptionPane.showMessageDialog(null, "Solo numeros", "¡Error!", JOptionPane.WARNING_MESSAGE);
             evt.consume();
         }
     }//GEN-LAST:event_txtfEntradaLongKeyTyped
 
     private void btnConvertirTmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConvertirTmpActionPerformed
-        
+
         //guardo en una variable float la entrada del usuario
         entrada = Float.parseFloat(txtfEntradaTmp.getText());
 
@@ -1174,7 +1309,7 @@ public class Portada extends javax.swing.JFrame {
                 break;
         }
         int confirma = JOptionPane.showConfirmDialog(rootPane, "¿Desea Continuar?", "Continuar usando", WIDTH);
-        if (confirma != 0){
+        if (confirma != 0) {
             JOptionPane.showMessageDialog(null, "Programa Terminado");
             System.exit(0);
         }
@@ -1358,7 +1493,7 @@ public class Portada extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbEntradaLongItemStateChanged
 
     private void btnConvertirLongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConvertirLongActionPerformed
-        
+
         //guardo en una variable float la entrada del usuario
         entrada = Float.parseFloat(txtfEntradaLong.getText());
 
@@ -1425,7 +1560,7 @@ public class Portada extends javax.swing.JFrame {
                 break;
         }
         int confirma = JOptionPane.showConfirmDialog(rootPane, "¿Desea Continuar?", "Continuar usando", WIDTH);
-        if (confirma != 0){
+        if (confirma != 0) {
             JOptionPane.showMessageDialog(null, "Programa Terminado");
             System.exit(0);
         }
@@ -1444,7 +1579,7 @@ public class Portada extends javax.swing.JFrame {
 
     private void mniSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSalirActionPerformed
         int confirma = JOptionPane.showConfirmDialog(null, "Desea terminar el programa", "Cerrar", JOptionPane.CANCEL_OPTION);
-        if (confirma ==0){
+        if (confirma == 0) {
             System.exit(0);
         }
     }//GEN-LAST:event_mniSalirActionPerformed
